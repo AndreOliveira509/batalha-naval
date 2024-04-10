@@ -6,33 +6,35 @@
     display: grid;
     width: 100%;
     grid-template-columns: repeat(10, 50px);
-    max-width: 510px;
-    gap: 1px;
+    max-width: 590px;
+    border: 2px solid black;
+    gap: 10px;
     margin: 100px auto;
 }
 .card{
     aspect-ratio: 1/1;
-    background-color: gray;
     width: 100%;
     position: relative;
     transition: all 400ms ease;
     transform-style: preserve-3d;
+
       
 }
 .face {
     width: 100%;
     height: 100%;
     position: absolute;
-    border: 2px solid black;
+    background-position: center;
+    background-size: cover;
+    
 }
 .frente {
-    background: blue url('img/Wave.png') center/cover;
     transform: rotateY(180deg);
 }
 .verso {
     background: white url('img/Fire-icon.png') center/cover;
     backface-visibility: hidden;
 }
-.card:hover {
+.reveal-card {
     transform: rotateY(180deg);
 }
