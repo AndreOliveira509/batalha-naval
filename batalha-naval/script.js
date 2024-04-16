@@ -1,15 +1,11 @@
 const grid = document.querySelector('.grid');
-
+let jogadas = 16;
+let pontos = 0;
 //array para os cards
 const icons = [
     'Ship-1',
     'Ship-2',
     'Ship-3',
-    'Wave',
-    'Wave',
-    'Wave',
-    'Wave',
-    'Wave',
     'Wave',
     'Wave',
     'Wave',
@@ -41,46 +37,50 @@ const createElement = (tag, classe) => {
 //adicionando a class para a animação e de quebra pegando src da imagem para o sistema de pontos 
 
 const revealCard = ({ target }) => {
-    
-    if (target.parentNode.className.includes('reveal-card')){
-        return;
-    }  else{
-    target.parentNode.classList.add('reveal-card');
-    }
-}
-const score = () => {
-    let targetcard = document.querySelectorAll('.reveal-card img');
+    if (jogadas > 0) {
+        if (target.parentNode.className.includes('reveal-card')) {
+            return;
+        } else {
+            target.parentNode.classList.add('reveal-card');
+            const frenteImg = target.parentNode.querySelector('.frente').style.backgroundImage;
 
-    targetcard.forEach((card) => {
-        let srcCard = card.src;
-    })
-    
-    let score = 0;
+            
 
-    let barco1 = 'Ship-1.png';
-    let barco2 = 'Ship-2.png';
-    let barco3 = 'Ship-3.png';
-    let Bomb = 'Bomb.png';
-    let Wave = 'Wave.png';
-    
-    switch (srcCard){
-        case Wave:
-            score =+ 0;
-        break;
-        case Bomb:
-            score = 0;
-        case barco1:
-            score =+ 5;
-        break;
-        case barco2:
-            score =+ 10;
-        break;
-        case barco3:
-            score =+ 15;
-        break;
+            if (frenteImg.includes('Ship-1.png')) {
+                pontos += 5;
+            } else if (frenteImg.includes('Ship-2.png')) {
+                pontos += 10;
+            } else if (frenteImg.includes('Ship-3.png')) {
+                pontos += 15;
+            } else if (frenteImg.includes('Bomb.png')) {
+                pontos = 0;
+            }
+
+            jogadas -= 1;
+
+            var txtjog = document.getElementById('txtjog');
+            txtjog.innerText = `Numero de jogadas = ${jogadas}`;
+
+            var txtscore = document.getElementById('score');
+            txtscore.innerText = `Score = ${pontos}`;
+
+            
+            var restart = document.getElementById('restart');
+            restart.addEventListener('click',()=>{
+                window.location.href = 'index.html';
+            })
+
+            if (jogadas == 0 && pontos < 30){
+                txtscore.innerHTML += `<br>Tente Novamente!`;
+                restart.style.display = 'flex';
+                //window.location.href = 'index.html';
+            } else if (jogadas == 0 && pontos >= 30){
+                txtscore.innerHTML += `<br>Parabéns Você Ganhou!`;
+                restart.style.display = 'flex';
+            }
+        }
     }
-    console.log(soma);
-}
+};
 
 
 //CRIANDO O CARD PELO O JS
@@ -108,7 +108,7 @@ const createCard = (icon) => {
 
 const loadGame = () => {
 
-    const multicons = [ ... icons, ... icons, ... icons, ... icons]
+    const multicons = [ ... icons, ... icons, ... icons, ... icons,  ... icons]
 
     const randomArray = multicons.sort( () => Math.random() - 0.5);
 
