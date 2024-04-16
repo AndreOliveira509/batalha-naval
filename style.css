@@ -1,0 +1,74 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background-color: rgb(107, 107, 241);
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    width: 100%;
+
+}
+h1{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color:  white;
+}
+    #linha2{
+        width: 60vw;
+        display: flex;
+        justify-content: space-around;
+    }
+    #score{
+        color:  white;
+}
+    #txtjog{
+        color:  white;
+    }
+    #restart{
+        width: 50px;
+        display: none;
+    }
+.grid{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(10, 50px);
+    max-width: 590px;
+    border: 2px solid white;
+    gap: 10px;
+    margin: 40px auto;
+    
+}
+
+.card{
+    aspect-ratio: 1/1;
+    width: 100%;
+    position: relative;
+    transition: all 400ms ease;
+    transform-style: preserve-3d;
+
+      
+}
+.face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+    
+}
+.frente {
+    transform: rotateY(180deg);
+}
+.verso {
+    background: rgb(107, 107, 241) url('img/Fire-icon.png') center/cover;
+    backface-visibility: hidden;
+}
+.reveal-card {
+    transform: rotateY(180deg);
+}
